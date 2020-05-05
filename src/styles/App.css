@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+div .odd-row {
+  background-color: #cdcdcd;
+}
+
+div .name-inactive {
+  display: none;
+}
+
 @media only print {
   .no-print {
     display: none;
