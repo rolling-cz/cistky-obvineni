@@ -1,6 +1,7 @@
 import * as React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {nameToString} from "../services/CharacterUtils";
 
 export default class Character extends React.Component {
 
@@ -69,27 +70,17 @@ export default class Character extends React.Component {
         if (this.state.data.overwrite) {
             return (
                 <div>
-                    {this.renderOneName(this.state.data.overwrite)}
+                    {nameToString(this.state.data.overwrite)}
                 </div>
             )
         } else {
             return (
                 <div>
-                    <div className={this.getNameStyle(1, this.state.data)}>{this.renderOneName(this.state.data.male)}</div>
-                    <div className={this.getNameStyle(2, this.state.data)}>{this.renderOneName(this.state.data.female)}</div>
+                    <div className={this.getNameStyle(1, this.state.data)}>{nameToString(this.state.data.male)}</div>
+                    <div className={this.getNameStyle(2, this.state.data)}>{nameToString(this.state.data.female)}</div>
                 </div>
             )
         }
-    }
-
-    renderOneName(name) {
-        let nameToPrint = name.lastName + ', ' + name.firstName
-
-        if (name.patronymic) {
-            nameToPrint += ' ' + name.patronymic;
-        }
-
-        return nameToPrint;
     }
 
     handleClose() {
