@@ -58,8 +58,11 @@ export default class AccusationList extends React.Component {
             default:
                 throw new Error("Unknown type " + this.state.accusationType);
         }
-
-        this.setState({showDialog: true, characterIdToAccuse: foundId})
+        if (foundId > 0) {
+            this.setState({showDialog: true, characterIdToAccuse: foundId})
+        } else {
+            alert("Nepodařilo se najít žádnou odpovídající postavu. Nejprve se musí aktivovat postavy pro daná kritéria.")
+        }
     }
 
     renderGroupSelect() {
