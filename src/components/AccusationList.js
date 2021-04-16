@@ -1,5 +1,5 @@
 import * as React from "react";
-import { nameToString, getActiveName } from "../services/CharacterUtils";
+import { nameToString, getActiveName, listGroups } from "../services/CharacterUtils";
 import { findCharacterFromGroup, findCharacterFromAll, addAccusation } from "../services/AccusationUtils";
 
 import Button from "react-bootstrap/Button";
@@ -10,7 +10,7 @@ export default class AccusationList extends React.Component {
     constructor(props) {
         super(props);
 
-        this.groupList = this.findGroups(props.data);
+        this.groupList = listGroups(props.data);
 
         this.state = {
             data: props.data,
@@ -25,17 +25,6 @@ export default class AccusationList extends React.Component {
 
     componentWillReceiveProps(props) {
         this.setState({data: props.data})
-    }
-
-    findGroups(data) {
-        const groups = [];
-        data.forEach(char => {
-            if (!groups.includes(char.group)) {
-                groups.push(char.group)
-            }
-        })
-
-        return groups;
     }
 
     confirmAccusation() {

@@ -4,6 +4,7 @@ import Tab from "react-bootstrap/Tab";
 import { loadData } from "../services/Loader";
 import CharacterList from "./CharacterList"
 import AccusationList from "./AccusationList"
+import ChangeGroup from "./ChangeGroup"
 
 export default class Container extends React.Component {
     constructor(props) {
@@ -29,6 +30,14 @@ export default class Container extends React.Component {
         } else {
             return a.group.localeCompare(b.group);
         }
+    }
+
+    updateCharacterGroup(id, newGroup) {
+        const newData = JSON.parse(JSON.stringify(this.state.data));
+        const char = newData.find(char => char.id === id);
+        char.group = newGroup
+        newData.sort(this.compareFunction);
+        this.setState({data: newData});
     }
 
     updateCharacterState(id, newActiveState) {
@@ -66,6 +75,11 @@ export default class Container extends React.Component {
                             updateState={this.updateCharacterState.bind(this)}
                             overwriteName={this.overwriteCharacterName.bind(this)}
                         />
+                    </Tab>
+                    <Tab eventKey="changeGroup" title="Změna skupiny">
+                        <ChangeGroup
+                            data={this.state.data}
+                            updateGroup={this.updateCharacterGroup.bind(this)}/>
                     </Tab>
                     <Tab eventKey="accusations" title="Obvinění">
                         <AccusationList data={this.state.data} />

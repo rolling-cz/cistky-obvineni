@@ -21,3 +21,14 @@ module.exports.getActiveName = (character) => {
         return character.female;
     }
 }
+
+module.exports.listGroups = (data) => {
+    const groups = [];
+    data.forEach(char => {
+        if (!groups.includes(char.group)) {
+            groups.push(char.group)
+        }
+    })
+
+    return groups;
+}
